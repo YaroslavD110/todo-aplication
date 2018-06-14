@@ -1,0 +1,20 @@
+.todos-wrap {
+    display: flex;
+}
+
+.todos-list {
+    max-width: 20%;
+    flex-basis: 20%;
+    height: 100vh;
+    overflow-y: auto;
+
+    box-shadow: 3px 0px 10px 0px rgba(0,0,0,0.4);
+}
+
+.todo {
+    display: flex;
+    max-width: 80%;
+    flex-basis: 80%;
+    justify-content: center;
+    align-items: center;
+}
