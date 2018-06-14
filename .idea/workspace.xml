@@ -2,33 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c28f687-bfa4-4612-aa6c-424d4d07d145" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/todos.iml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/package.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/favicon.ico" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/manifest.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/Components/Todo.jsx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/Components/TodoForm.jsx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/Components/TodosList.jsx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/Components/index.jsx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/Containers/AddTodoButton.jsx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/Containers/TodosListItem.jsx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/todos.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/utils/getGuid.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/utils/getTodoById.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Todos/utils/transformTodos.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/almost_db.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/index.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/index.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/yarn.lock" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -45,8 +19,8 @@
       <file leaf-file-name="TodoForm.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Todos/Components/TodoForm.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="20" column="6" lean-forward="false" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+            <state relative-caret-position="650">
+              <caret line="25" column="35" lean-forward="false" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -103,8 +77,8 @@
         <option value="$PROJECT_DIR$/src/Todos/Components/index.jsx" />
         <option value="$PROJECT_DIR$/src/Todos/Components/TodosList.jsx" />
         <option value="$PROJECT_DIR$/src/Todos/Components/Todo.jsx" />
-        <option value="$PROJECT_DIR$/src/Todos/Components/TodoForm.jsx" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/Todos/Components/TodoForm.jsx" />
       </list>
     </option>
   </component>
@@ -298,12 +272,12 @@
       <option name="presentableId" value="Default" />
       <updated>1528884524435</updated>
       <workItem from="1528884525624" duration="26093000" />
-      <workItem from="1528976391808" duration="5885000" />
+      <workItem from="1528976391808" duration="5953000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31978000" />
+    <option name="totallyTimeSpent" value="32046000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -317,7 +291,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="0" y="29" width="1920" height="1001" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="-86" y="1035" width="1920" height="1001" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -577,8 +551,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Todos/Components/TodoForm.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="20" column="6" lean-forward="false" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        <state relative-caret-position="650">
+          <caret line="25" column="35" lean-forward="false" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
