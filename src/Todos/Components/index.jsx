@@ -8,6 +8,7 @@ import Todo from './Todo';
 
 import getTodoById from '../utils/getTodoById';
 import transformTodos from '../utils/transformTodos';
+import { successMessage, warningMessage } from '../utils/uiMessages';
 
 import '../todos.css';
 
@@ -75,6 +76,9 @@ class Todos extends Component {
             let newTodos = prevState.todos.map( todo => (todo.isActive) ? {...todo, isActive: false} : todo );
             return { todos: [...newTodos, todo] };
         });
+
+        successMessage('Todo success added!');
+
         this.toggleForm();
     };
 
@@ -86,6 +90,8 @@ class Todos extends Component {
                 return { todos: newTodos };
             } else { return { todos: prevState.todos.filter(todo => todo.id !== todoId) } }
         });
+
+        warningMessage('Todo deleted!');
     };
 
     render() {

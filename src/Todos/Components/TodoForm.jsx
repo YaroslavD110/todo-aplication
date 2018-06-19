@@ -11,6 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 
 import guid from '../utils/getGuid';
+import { errorMessage } from "../utils/uiMessages";
 
 const styles = {
     card: {
@@ -71,6 +72,18 @@ class TodoForm extends Component {
         this.setState({ descFieldValue: e.target.value });
     };
 
+    checkFields = (e) => {
+        e.preventDefault();
+
+        const { titleFiledValue, descFieldValue } = this.state;
+
+        if(titleFiledValue.trim() === '' || descFieldValue.trim() === '') {
+            errorMessage("You must enter something in field!");
+        } else {
+            this.createNewTodo();
+        }
+    };
+
     render() {
         const { classes } = this.props;
         const { titleFiledValue, descFieldValue } = this.state;
@@ -104,7 +117,7 @@ class TodoForm extends Component {
                             variant="contained"
                             color="primary"
                             className={classes.formBtn}
-                            onClick={this.createNewTodo}
+                            onClick={this.checkFields}
                         >
                             Create
                         </Button>
