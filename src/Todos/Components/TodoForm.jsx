@@ -65,11 +65,11 @@ class TodoForm extends Component {
     };
 
     handleTitleField = (e) => {
-        this.setState({ titleFiledValue: e.target.value });
+        this.setState({ titleFiledValue: e.currentTarget.value });
     };
 
     handleDescField = (e) => {
-        this.setState({ descFieldValue: e.target.value });
+        this.setState({ descFieldValue: e.currentTarget.value });
     };
 
     checkFields = (e) => {
@@ -89,7 +89,7 @@ class TodoForm extends Component {
         const { titleFiledValue, descFieldValue } = this.state;
 
         return (
-            <div className="todo">
+            <div className="todo-screen animate-showing">
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
                         <h1 className={classes.header}>Create new todo</h1>

@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import AddTodoButton from '../Containers/AddTodoButton';
 import TodosList from './TodosList';
 import TodoForm from './TodoForm';
-import Todo from './Todo';
+import Todo from '../Containers/Todo';
 
 import getTodoById from '../utils/getTodoById';
 import transformTodos from '../utils/transformTodos';
-import { successMessage, warningMessage } from '../utils/uiMessages';
+import transformId from '../utils/transformId';
+import { successMessage, warningMessage, errorMessage, infoMessage } from '../utils/uiMessages';
 
 import '../todos.css';
+import Loader from '../utils/loader';
 
 class Todos extends Component {
-    static propTypes = {
-        todos: PropTypes.array.isRequired,
-    };
-
     state = {
-        todos: transformTodos(this.props.todos),
+        todos: [],
         showForm: false,
+        isPreloader: true,
     };
 
     getActiveTodo = () => this.state.todos.find( todo => todo.isActive === true);
@@ -42,26 +40,65 @@ class Todos extends Component {
     };
 
     toggleTodoRejecting = (todoId) => {
-        this.setState( prevState => {
-            return { todos: prevState.todos.map( todo => {
-                return (todo.id === todoId)
-                    ? ({...todo, isRejected: !todo.isRejected})
-                    : todo
-            })};
+        let newTodos = this.state.todos.map( todo => {
+            return (todo.id === todoId)
+                ? ({...todo, isRejected: !todo.isRejected})
+                : todo
         });
+
+        fetch(`http://localhost:8080/edit/${todoId}`, {
+            method: 'put',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(transformId(newTodos.find(todo => todo.id === todoId))),
+        })
+            .then(res => {
+                if(res.errorMessage) {
+                   errorMessage(res.errorMessage);
+                } else {
+                    this.setState({ todos: newTodos}, () => {
+                        infoMessage(`"${getTodoById(newTodos, todoId).title}" reject status was changed!`);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                errorMessage("Filed toggle todo status!");
+            });
     };
 
     toggleTodoDoneStatus = (todoId) => {
         let currentTodo = getTodoById(this.state.todos, todoId);
+        let newTodos = this.state.todos.map( todo => {
+            return (todo.id === todoId)
+                ? ({...todo, isDone: !todo.isDone})
+                : todo
+        });
 
         if(!currentTodo.isRejected) {
-            this.setState( prevState => {
-                return { todos: prevState.todos.map( todo => {
-                    return (todo.id === todoId)
-                        ? ({...todo, isDone: !todo.isDone})
-                        : todo
-                })};
-            });
+            fetch(`http://localhost:8080/edit/${todoId}`, {
+                method: 'put',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(transformId(newTodos.find(todo => todo.id === todoId))),
+            })
+                .then(res => {
+                    if (res.errorMessage) {
+                        errorMessage(res.errorMessage);
+                    } else {
+                        this.setState({todos: newTodos}, () => {
+                            infoMessage(`"${getTodoById(newTodos, todoId).title}" done status was changed!`);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    errorMessage("Filed toggle todo status!");
+                });
         }
     };
 
@@ -72,35 +109,77 @@ class Todos extends Component {
     };
 
     addTodo = (todo) => {
-        this.setState( prevState => {
-            let newTodos = prevState.todos.map( todo => (todo.isActive) ? {...todo, isActive: false} : todo );
-            return { todos: [...newTodos, todo] };
-        });
-
-        successMessage('Todo success added!');
-
-        this.toggleForm();
+        fetch("http://localhost:8080/todos", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(transformId(todo)),
+        })
+            .then(res => res.json())
+            .then(res => {
+                if(res.errorMessage) {
+                    errorMessage(res.errorMessage);
+                } else {
+                    this.setState( prevState => {
+                        let newTodos = prevState.todos.map( todo => (todo.isActive) ? {...todo, isActive: false} : todo );
+                        return { todos: [...newTodos, todo] };
+                    });
+                    successMessage('Todo success added!');
+                    this.toggleForm();
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                errorMessage("Filed to create new todo!");
+            });
     };
 
     deleteTodo = (todoId) => {
-        this.setState( prevState => {
-            if(todoId === this.getActiveTodo().id) {
-                let newTodos = prevState.todos.filter(todo => todo.id !== todoId);
-                if(newTodos.length > 0) { newTodos[0].isActive = true; }
-                return { todos: newTodos };
-            } else { return { todos: prevState.todos.filter(todo => todo.id !== todoId) } }
-        });
+        fetch(`http://localhost:8080/delete/${todoId}`, {method: 'delete'})
+            .then(res => res.json())
+            .then(res => {
+                if(res.errorMessage) {
+                    errorMessage(res.errorMessage);
+                } else {
+                    this.setState( prevState => {
+                        if(todoId === this.getActiveTodo().id) {
+                            let newTodos = prevState.todos.filter(todo => todo.id !== todoId);
+                            if(newTodos.length > 0) { newTodos[0].isActive = true; }
+                            return { todos: newTodos };
+                        } else { return { todos: prevState.todos.filter(todo => todo.id !== todoId) } }
+                    });
 
-        warningMessage('Todo deleted!');
+                    warningMessage('Todo deleted!');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                errorMessage("Filed to delete todo!");
+            });
     };
 
-    render() {
-        const { todos, showForm } = this.state;
+    componentDidMount() {
+        fetch("http://localhost:8080/todos")
+            .then(res => res.json())
+            .then(todos => {
+                this.setState({isPreloader: false, todos: transformTodos(todos)});
+            })
+            .catch(error => {
+                console.error(error);
+                this.setState({isPreloader: false}, () => {
+                    errorMessage("Filed to load data from db!")
+                });
+            });
+    }
 
-        window.todos = todos;
+    render() {
+        const { todos, showForm, isPreloader } = this.state;
 
         return (
             <div className="todos-wrap">
+                { isPreloader && <div className="cover"><Loader /></div> }
                 <TodosList
                     todos={todos}
                     toggleActiveTodo={this.toggleActiveTodo}
