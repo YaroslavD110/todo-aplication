@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const dbConfig = require('../config/db.config.js');
+const { dbUrl } = require('../config.js');
 const Todo = require('./models/todo.model.js');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(dbConfig.url)
+mongoose.connect(dbUrl)
     .then(() => console.log('Node app has connected to db!'))
     .catch(error => {
         console.error(error);

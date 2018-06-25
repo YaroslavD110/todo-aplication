@@ -2,10 +2,10 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const appConfig = require('./config/app.config.js');
+const { APP_PORT } = require('./config.js');
 const db = require('./db');
 
-const PORT = process.env.PORT || appConfig.port;
+const PORT = process.env.PORT || APP_PORT;
 const app = express();
 
 // Middlewares
@@ -19,16 +19,19 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', '/build/index.html'));
 });
 
+// 404 page
+app.use((req, res) => {
+    res.status(404).send("<h1>Sorry, page not found!</h1>");
+});
+
 // REST API routes
-app.get('/todos', db.getAllTodos);
+app.get('/api/todos', db.getAllTodos);
 
-app.post('/todos', db.createTodo);
+app.post('/api/todos', db.createTodo);
 
-app.put('/edit/:id', db.editTodo);
+app.put('/api/todos/edit/:id', db.editTodo);
 
-app.delete('/delete/:id', db.deleteTodo);
+app.delete('/api/todos/delete/:id', db.deleteTodo);
 
 // Starting server
-app.listen(PORT, () => {
-    console.log(`Server has started on port ${PORT}!`);
-});
+app.listen(PORT, () => console.log(`Server has started on port ${PORT}!`));

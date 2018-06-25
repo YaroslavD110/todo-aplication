@@ -1,0 +1,1 @@
+export const REST_API_URI = 'http://localhost:8080/api';

@@ -9,6 +9,7 @@ import getTodoById from '../utils/getTodoById';
 import transformTodos from '../utils/transformTodos';
 import transformId from '../utils/transformId';
 import { successMessage, warningMessage, errorMessage, infoMessage } from '../utils/uiMessages';
+import { REST_API_URI } from '../../config';
 
 import '../todos.css';
 import Loader from '../utils/loader';
@@ -46,7 +47,7 @@ class Todos extends Component {
                 : todo
         });
 
-        fetch(`http://localhost:8080/edit/${todoId}`, {
+        fetch(`${REST_API_URI}/todos/edit/${todoId}`, {
             method: 'put',
             headers: {
                 'Accept': 'application/json',
@@ -78,7 +79,7 @@ class Todos extends Component {
         });
 
         if(!currentTodo.isRejected) {
-            fetch(`http://localhost:8080/edit/${todoId}`, {
+            fetch(`${REST_API_URI}/todos/edit/${todoId}`, {
                 method: 'put',
                 headers: {
                     'Accept': 'application/json',
@@ -109,7 +110,7 @@ class Todos extends Component {
     };
 
     addTodo = (todo) => {
-        fetch("http://localhost:8080/todos", {
+        fetch(`${REST_API_URI}/todos`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -137,7 +138,7 @@ class Todos extends Component {
     };
 
     deleteTodo = (todoId) => {
-        fetch(`http://localhost:8080/delete/${todoId}`, {method: 'delete'})
+        fetch(`${REST_API_URI}/todos/delete/${todoId}`, {method: 'delete'})
             .then(res => res.json())
             .then(res => {
                 if(res.errorMessage) {
@@ -161,7 +162,7 @@ class Todos extends Component {
     };
 
     componentDidMount() {
-        fetch("http://localhost:8080/todos")
+        fetch(`${REST_API_URI}/todos`)
             .then(res => res.json())
             .then(todos => {
                 this.setState({isPreloader: false, todos: transformTodos(todos)});
