@@ -33,7 +33,7 @@ const styles = {
 };
 
 const Todo = ({ classes, activeTodo, toggleTodoRejecting, toggleTodoDoneStatus, deleteTodo }) => (
-    <div className="todo-screen animate-showing">
+    <div className="animate-showing">
         <Card className={classes.card}>
             <CardContent className={classes.cardContent}>
                 <h1 className={classes.header}>{activeTodo.title}</h1>

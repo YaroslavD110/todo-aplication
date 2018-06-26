@@ -11,12 +11,20 @@
     box-shadow: 3px 0px 10px 0px rgba(0,0,0,0.4);
 }
 
-.todo-screen {
+.todos-screen {
     display: flex;
+    position: relative;
     max-width: 80%;
     flex-basis: 80%;
     justify-content: center;
     align-items: center;
+}
+
+.todos-filter {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translatex(-50%);
 }
 
 .animate-showing {

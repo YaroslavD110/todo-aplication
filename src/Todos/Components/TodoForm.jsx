@@ -89,7 +89,7 @@ class TodoForm extends Component {
         const { titleFiledValue, descFieldValue } = this.state;
 
         return (
-            <div className="todo-screen animate-showing">
+            <div className="animate-showing">
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
                         <h1 className={classes.header}>Create new todo</h1>

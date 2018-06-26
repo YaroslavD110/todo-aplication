@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import AddTodoButton from '../Containers/AddTodoButton';
 import TodosList from './TodosList';
 import TodoForm from './TodoForm';
+import TodoFilter from './TodoFilter';
 import Todo from '../Containers/Todo';
 
 import getTodoById from '../utils/getTodoById';
@@ -17,11 +18,14 @@ import Loader from '../utils/loader';
 class Todos extends Component {
     state = {
         todos: [],
+        filtredTodos: null,
         showForm: false,
         isPreloader: true,
     };
 
     getActiveTodo = () => this.state.todos.find( todo => todo.isActive === true);
+
+    filterTodos = (newTodos) => this.setState({ filtredTodos: newTodos });
 
     toggleActiveTodo = (todoId) => {
         this.setState( prevState => {
@@ -176,29 +180,36 @@ class Todos extends Component {
     }
 
     render() {
-        const { todos, showForm, isPreloader } = this.state;
+        const { todos, showForm, isPreloader, filtredTodos } = this.state;
 
         return (
             <div className="todos-wrap">
-                { isPreloader && <div className="cover"><Loader /></div> }
-                <TodosList
-                    todos={todos}
-                    toggleActiveTodo={this.toggleActiveTodo}
-                    deleteTodo={this.deleteTodo}
-                />
-                { (showForm || (todos.length < 1))
-                    ? <TodoForm
-                        addTodo={this.addTodo}
-                    />
-                    : <Todo
-                        activeTodo={this.getActiveTodo()}
-                        toggleTodoRejecting={this.toggleTodoRejecting}
-                        toggleTodoDoneStatus={this.toggleTodoDoneStatus}
-                        deleteTodo={this.deleteTodo}
-                    />
+                { isPreloader
+                    ? <div className="cover"><Loader /></div>
+                    : <Fragment>
+                        <TodosList
+                            todos={ filtredTodos || todos }
+                            toggleActiveTodo={this.toggleActiveTodo}
+                            deleteTodo={this.deleteTodo} />
+                        <div className="todos-screen">
+                            <TodoFilter
+                                todos={todos}
+                                filterTodos={this.filterTodos} />
+                            { (showForm || (todos.length < 1))
+                                ? <TodoForm
+                                    addTodo={this.addTodo}
+                                />
+                                : <Todo
+                                    activeTodo={this.getActiveTodo()}
+                                    toggleTodoRejecting={this.toggleTodoRejecting}
+                                    toggleTodoDoneStatus={this.toggleTodoDoneStatus}
+                                    deleteTodo={this.deleteTodo}
+                                />
+                            }
+                            <AddTodoButton toggleForm={this.toggleForm} />
+                        </div>
+                    </Fragment>
                 }
-
-                <AddTodoButton toggleForm={this.toggleForm} />
             </div>
         );
     }
