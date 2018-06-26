@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 
 const styles = theme => ({
     margin: {
-        margin: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 2,
     }
 });
 
